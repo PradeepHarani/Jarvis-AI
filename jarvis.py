@@ -3,17 +3,17 @@ import pyttsx3
 import webbrowser
 from datetime import datetime
 import pywhatkit
-import time
 import google.generativeai as genai 
 import sys
 import pyautogui
 import os
 
 from dotenv import load_dotenv
+load_dotenv() 
 API_KEY = os.getenv("GEMINI_API_KEY")
 
 
-genai.configure(api_key="API_KEY")
+genai.configure(api_key=API_KEY)
 # getting acess using the api key
 model= genai.GenerativeModel("gemini-1.5-flash")
 # mentioning the model of gemini
@@ -54,8 +54,8 @@ def activites():
         pywhatkit.search(search)
     elif"weather" in command2:
         city=command2.replace("weather","").strip()
-        speak(f" Searching wheathe of{city} on Google")
-        pywhatkit.search(f"whather {city}")
+        speak(f" Searching weather of{city} on Google")
+        pywhatkit.search(f"weather {city}")
     elif "time" in command2:
         tell_time()
     elif "pause"in command2 and not "play" in command2:
@@ -72,7 +72,6 @@ def activites():
         pyautogui.press("m")
     else:
         speak("let me check for you using ai")
-        time
         answer=ask_gemine(command2)
         speak(answer)
     
@@ -88,7 +87,7 @@ def listen():
         print("Listening... Speak now!")
         recognizer.adjust_for_ambient_noise(source,duration=0.5)  # Reduce background noise
         try:
-            audio = recognizer.listen(source, timeout=3, phrase_time_limit=4)  # Capture audio
+            audio = recognizer.listen(source, timeout=5, phrase_time_limit=8)  # Capture audio
         except sr.WaitTimeoutError:
             print("out of reach")
             return ""
