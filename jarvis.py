@@ -7,9 +7,13 @@ import time
 import google.generativeai as genai 
 import sys
 import pyautogui
+import os
+
+from dotenv import load_dotenv
+API_KEY = os.getenv("GEMINI_API_KEY")
 
 
-genai.configure(api_key="AIzaSyCgVxA_vqSrADv1QAlIr79vmfF5RL61gBQ")
+genai.configure(api_key="API_KEY")
 # getting acess using the api key
 model= genai.GenerativeModel("gemini-1.5-flash")
 # mentioning the model of gemini
